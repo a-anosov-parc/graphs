@@ -12246,7 +12246,7 @@ BRp.recalculateNodeLabelProjection = function( node ){
 
   switch( textValign ){
     case 'top':
-      textY = nodePos.y - nodeHeight / 2;
+      textY = nodePos.y - nodeHeight / 2 - 8; // FIX
       break;
 
     case 'bottom':
@@ -16668,7 +16668,6 @@ CRp.drawText = function(context, element, textX, textY) {
         }
 
         context.fillText( lines[l], textX, textY );
-
         textY += lineHeight;
       }
 
@@ -16678,6 +16677,17 @@ CRp.drawText = function(context, element, textX, textY) {
       }
 
       context.fillText( text, textX, textY );
+
+      // FIX start
+      if (!element[0]._private.data.isCompounded) {
+        var dotsX = textX + element.width() / 2 + 15;
+
+        context.fillStyle = '#b1becd';
+        context.fillText('•', dotsX, textY);
+        context.fillText('•', dotsX + 6, textY);
+        context.fillText('•', dotsX + 12, textY);
+      }
+      // FIX end
     }
 
 
