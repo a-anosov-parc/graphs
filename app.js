@@ -16,30 +16,39 @@ $(function () {
 				id: 'b',
 				label: 'ОАО "Терем"',
 				parent: 'a'
-			}
+			},
+			classes: 'company menu'
 		}, {
 			data: {
 				id: 'c',
 				label: 'ОАО "Русатом"',
 				parent: 'a'
-			}
+			},
+			classes: 'company menu'
 		}, {
 			data: {
 				id: 'f',
 				label: 'Петров Иван Иванович'
 			},
-			classes: 'person'
+			classes: 'person menu'
 		}, {
 			data: {
 				id: 'fc',
 				source: 'f',
-				target: 'c'
+				target: 'c',
+				label: 'Руководитель'
 			}
 		}],
 		style: [{
 			selector: 'core',
 			css: {
 				'active-bg-size': 0
+			}
+		}, {
+			selector: ':active',
+			css: {
+				'overlay-padding': 0,
+				'overlay-opacity': 0
 			}
 		}, {
 			selector: 'node',
@@ -55,6 +64,7 @@ $(function () {
 				'font-family': 'Arial, Helvetica, sans-serif',
 				'text-valign': 'center',
 				'text-halign': 'center',
+				'border-color': '#a2ccf2',
 				'background-color': '#deefff',
 				'background-image': '/company.png',
 				'background-position-x': '-33px'
@@ -65,6 +75,11 @@ $(function () {
 				'background-color': '#ffe596',
 				'background-image': '/person.png',
 				'background-position-x': '-28px'
+			}
+		}, {
+			selector: 'node:active, node.active',
+			css: {
+				'border-width': 1
 			}
 		}, {
 			selector: '$node > node',
@@ -79,10 +94,15 @@ $(function () {
 				'background-image': 'none'
 			}
 		}, {
+			selector: '$node:active > node, $node.active > node',
+			css: {
+				'border-width': 0
+			}
+		}, {
 			selector: 'edge',
 			css: {
 				//'curve-style': 'segments',
-				'line-style': 'dashed',
+				'line-style': 'dashed'
 				//'target-arrow-shape': 'triangle'
 			}
 		}],
@@ -103,17 +123,31 @@ $(function () {
 		userZoomingEnabled: false
 	});
 
-	window.cy.$('#f').qtip({
-		content: '<h3>Hello!</h3>',
+	window.cy.on('click', function () {
+		window.cy.$('node').removeClass('active');
+	});
+
+	window.cy.on('click', 'node', function (e) {
+		e.cyTarget.addClass('active');
+	});
+
+	window.cy.$('.menu').qtip({
+		content: 'Menu',
 		position: {
 			my: 'top center',
 			at: 'bottom right'
 		},
 		style: {
-			classes: 'qtip-bootstrap',
-			tip: {
-				width: 16,
-				height: 8
+			classes: 'qtip-bootstrap'
+		},
+		events: {
+			show: function (event, api) {
+				setTimeout(function () {
+					var $qtip = $('.qtip:visible').first();
+
+					console.log($qtip.data('ele'));
+					//$qtip.css('visibility', 'visible');
+				}, 25);
 			}
 		}
 	});

@@ -16682,7 +16682,7 @@ CRp.drawText = function(context, element, textX, textY) {
       if (!element[0]._private.data.isCompounded) {
         var dotsX = textX + element.width() / 2 + 15;
 
-        context.fillStyle = '#b1becd';
+        context.fillStyle = (element[0]._private.active || element.hasClass('active')) ? '#292d38' : '#b1becd';
         context.fillText('•', dotsX, textY);
         context.fillText('•', dotsX + 6, textY);
         context.fillText('•', dotsX + 12, textY);
@@ -19969,7 +19969,7 @@ math.generateUnitNgonPoints = function(sides, rotationRadians) {
 math.getRoundRectangleRadius = function(width, height) {
 
   // Set the default radius, unless half of width or height is smaller than default
-  return Math.min(width / 4, height / 4, 8);
+  return Math.min(width / 2, height / 2, 16); // FIX
 };
 
 module.exports = math;

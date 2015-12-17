@@ -264,6 +264,12 @@
           updatePosition(e);
 
           qtipApi.show();
+
+          // FIX start
+          setTimeout(function () {
+            $('.qtip:visible').data('ele', ele);
+          }, 0);
+          // FIX end
         } );
 
         ele.on( opts.hide.event, function(e){
