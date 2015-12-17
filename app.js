@@ -66,14 +66,14 @@ $(function () {
 				'text-halign': 'center',
 				'border-color': '#a2ccf2',
 				'background-color': '#deefff',
-				'background-image': '/company.png',
+				'background-image': 'company.png',
 				'background-position-x': '-33px'
 			}
 		}, {
 			selector: 'node.person',
 			css: {
 				'background-color': '#ffe596',
-				'background-image': '/person.png',
+				'background-image': 'person.png',
 				'background-position-x': '-28px'
 			}
 		}, {
@@ -124,29 +124,41 @@ $(function () {
 	});
 
 	window.cy.on('click', function () {
-		window.cy.$('node').removeClass('active');
+		window.cyClickTimeout = setTimeout(function () {
+			window.cy.$('node').removeClass('active');
+		}, 0);
 	});
 
 	window.cy.on('click', 'node', function (e) {
-		e.cyTarget.addClass('active');
+		var isActive = e.cyTarget.hasClass('active');
+
+		window.cy.$('node').removeClass('active');
+		clearTimeout(window.cyClickTimeout);
+		e.cyTarget.toggleClass('active', !isActive);
 	});
 
 	window.cy.$('.menu').qtip({
-		content: 'Menu',
+		content: '&nbsp;',
 		position: {
 			my: 'top center',
 			at: 'bottom right'
 		},
 		style: {
-			classes: 'qtip-bootstrap'
+			classes: 'qtip-bootstrap',
+			tip: {
+				width: 13,
+				height: 5
+			}
 		},
 		events: {
 			show: function (event, api) {
 				setTimeout(function () {
-					var $qtip = $('.qtip:visible').first();
+					var $tip = $(event.currentTarget),
+						ele = $tip.data('ele');
 
-					console.log($qtip.data('ele'));
-					//$qtip.css('visibility', 'visible');
+					if (ele) {
+						$tip.find('.qtip-content').html(ele.data('label'));
+					}
 				}, 25);
 			}
 		}
