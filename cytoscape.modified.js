@@ -16347,7 +16347,7 @@ CRp.drawEdgeText = function(context, edge) {
     context.translate(rs.labelX, rs.labelY);
     context.rotate(theta);
 
-    this.drawText(context, edge, 0, 0);
+    this.drawText(context, edge, 0, -15); // FIX
 
     context.rotate(-theta);
     context.translate(-rs.labelX, -rs.labelY);
@@ -16679,7 +16679,7 @@ CRp.drawText = function(context, element, textX, textY) {
       context.fillText( text, textX, textY );
 
       // FIX start
-      if (!element[0]._private.data.isCompounded) {
+      if (!element.data('isCompounded') && element.isNode()) {
         var dotsX = textX + element.width() / 2 + 15;
 
         context.fillStyle = (element[0]._private.active || element.hasClass('active')) ? '#292d38' : '#b1becd';

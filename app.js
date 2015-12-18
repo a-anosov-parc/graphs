@@ -7,37 +7,81 @@ $(function () {
 
 		elements: [{
 			data: {
-				id: 'a',
+				id: 'moscow',
 				isCompounded: true,
 				label: 'Москва'
 			}
 		}, {
 			data: {
-				id: 'b',
+				id: 'samara',
+				isCompounded: true,
+				label: 'Самара'
+			}
+		}, {
+			data: {
+				id: '1',
 				label: 'ОАО "Терем"',
-				parent: 'a'
+				parent: 'moscow'
 			},
 			classes: 'company menu'
 		}, {
 			data: {
-				id: 'c',
-				label: 'ОАО "Русатом"',
-				parent: 'a'
+				id: '2',
+				label: 'ОАО "Газпром"',
+				parent: 'moscow'
 			},
 			classes: 'company menu'
 		}, {
 			data: {
-				id: 'f',
-				label: 'Петров Иван Иванович'
+				id: '3',
+				label: 'Петров Иван Иванович',
+				parent: 'moscow'
 			},
 			classes: 'person menu'
 		}, {
 			data: {
-				id: 'fc',
-				source: 'f',
-				target: 'c',
+				id: '4',
+				label: 'ОАО "Русатом"',
+				parent: 'samara'
+			},
+			classes: 'company menu'
+		}, {
+			data: {
+				id: '5',
+				label: 'ОАО "БМВ Русланд"',
+				parent: 'samara'
+			},
+			classes: 'company menu'
+		}, {
+			data: {
+				id: '1-4',
+				source: '1',
+				target: '4',
+				label: 'Адвокат'
+			},
+			classes: 'dashed'
+		}, {
+			data: {
+				id: '4-5',
+				source: '4',
+				target: '5',
+				label: 'Арбитражные дела • 50'
+			}
+		}, {
+			data: {
+				id: '3-5',
+				source: '3',
+				target: '5',
 				label: 'Руководитель'
 			}
+		}, {
+			data: {
+				id: '2-3',
+				source: '2',
+				target: '3',
+				label: 'Учредитель'
+			},
+			classes: 'dashed'
 		}],
 		style: [{
 			selector: 'core',
@@ -101,17 +145,28 @@ $(function () {
 		}, {
 			selector: 'edge',
 			css: {
-				//'curve-style': 'segments',
+				'label': 'data(label)',
+				'color': '#8d94a0',
+				'line-color': '#8d94a0',
+				'font-size': 12,
+				'edge-text-rotation': 'autorotate'
+			}
+		}, {
+			selector: 'edge.dashed',
+			css: {
 				'line-style': 'dashed'
-				//'target-arrow-shape': 'triangle'
 			}
 		}],
 		layout: {
 			name: 'cose-bilkent',
 			fit: false,
 			padding: 16,
+			randomize: true,
+			animate: false,
 			stop: function () {
-				window.cy.center();
+				if (window.cy.center) {
+					window.cy.center();
+				}
 
 				setTimeout(function () {
 					$('#cy').removeClass('g-invisible');
