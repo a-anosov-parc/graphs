@@ -2,6 +2,15 @@
 'use strict';
 
 $(function () {
+	var randomInteger = function (min, max) {
+			return Math.round(min - 0.5 + Math.random() * (max - min + 1));
+		},
+		nodesSizes = [];
+
+	for (var i = 0; i < 5; i++) {
+		nodesSizes.push(randomInteger(32, 64));
+	}
+
 	window.cy = cytoscape({
 		container: $('#cy'),
 
@@ -24,7 +33,7 @@ $(function () {
 				parent: 'moscow'
 			},
 			position: { x: 400, y: 400 },
-			classes: 'company menu'
+			classes: 'node1 company menu'
 		}, {
 			data: {
 				id: '2',
@@ -32,7 +41,7 @@ $(function () {
 				parent: 'moscow'
 			},
 			position: { x: 300, y: 350 },
-			classes: 'company menu'
+			classes: 'node2 company menu'
 		}, {
 			data: {
 				id: '3',
@@ -40,7 +49,7 @@ $(function () {
 				parent: 'moscow'
 			},
 			position: { x: 100, y: 300 },
-			classes: 'person menu'
+			classes: 'node3 person menu'
 		}, {
 			data: {
 				id: '4',
@@ -48,7 +57,7 @@ $(function () {
 				parent: 'samara'
 			},
 			position: { x: 500, y: 100 },
-			classes: 'company menu'
+			classes: 'node4 company menu'
 		}, {
 			data: {
 				id: '5',
@@ -56,7 +65,7 @@ $(function () {
 				parent: 'samara'
 			},
 			position: { x: 250, y: 50 },
-			classes: 'company menu'
+			classes: 'node5 company menu'
 		}, {
 			data: {
 				id: '1-4',
@@ -117,16 +126,48 @@ $(function () {
 				'border-color': '#deefff',
 				'border-width': 1,
 				'background-color': '#deefff',
-				'background-image': 'company.png',
+				'background-fit': 'cover',
+				'background-position-x': '50%',
+				'background-position-y': '50%',
+				'background-image': 'company.png'
 				//'background-position-x': '-33px'
 			}
 		}, {
 			selector: 'node.person',
 			css: {
 				'background-color': '#ffe596',
-				'background-image': 'person.png',
-				'background-position-y': '3px'
+				'background-image': 'person.png'
 				//'background-position-x': '-28px'
+			}
+		}, {
+			selector: 'node.node1',
+			css: {
+				'width': nodesSizes[0],
+				'height': nodesSizes[0]
+			}
+		}, {
+			selector: 'node.node2',
+			css: {
+				'width': nodesSizes[1],
+				'height': nodesSizes[1]
+			}
+		}, {
+			selector: 'node.node3',
+			css: {
+				'width': nodesSizes[2],
+				'height': nodesSizes[2]
+			}
+		}, {
+			selector: 'node.node4',
+			css: {
+				'width': nodesSizes[3],
+				'height': nodesSizes[3]
+			}
+		}, {
+			selector: 'node.node5',
+			css: {
+				'width': nodesSizes[4],
+				'height': nodesSizes[4]
 			}
 		}, {
 			selector: 'node:active, node.active',
@@ -184,9 +225,9 @@ $(function () {
 				}, 100);
 			}
 		},
-		//minZoom: 0.5,
-		//maxZoom: 1,
-		userZoomingEnabled: false
+		minZoom: 0.8,
+		maxZoom: 1
+		//userZoomingEnabled: false
 	});
 
 	window.cy.on('click', function () {
@@ -207,7 +248,7 @@ $(function () {
 		content: '&nbsp;',
 		position: {
 			my: 'top center',
-			at: 'bottom right'
+			at: 'bottom center'
 		},
 		style: {
 			classes: 'qtip-bootstrap',
