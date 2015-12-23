@@ -23,6 +23,7 @@ $(function () {
 				label: 'ОАО "Терем"',
 				parent: 'moscow'
 			},
+			position: { x: 400, y: 400 },
 			classes: 'company menu'
 		}, {
 			data: {
@@ -30,6 +31,7 @@ $(function () {
 				label: 'ОАО "Газпром"',
 				parent: 'moscow'
 			},
+			position: { x: 300, y: 350 },
 			classes: 'company menu'
 		}, {
 			data: {
@@ -37,6 +39,7 @@ $(function () {
 				label: 'Петров Иван Иванович',
 				parent: 'moscow'
 			},
+			position: { x: 100, y: 300 },
 			classes: 'person menu'
 		}, {
 			data: {
@@ -44,6 +47,7 @@ $(function () {
 				label: 'ОАО "Русатом"',
 				parent: 'samara'
 			},
+			position: { x: 500, y: 100 },
 			classes: 'company menu'
 		}, {
 			data: {
@@ -51,13 +55,13 @@ $(function () {
 				label: 'ОАО "БМВ Русланд"',
 				parent: 'samara'
 			},
+			position: { x: 250, y: 50 },
 			classes: 'company menu'
 		}, {
 			data: {
 				id: '1-4',
 				source: '1',
 				target: '4',
-				type: 'bezier',
 				label: 'Адвокат'
 			},
 			classes: 'dashed'
@@ -74,14 +78,6 @@ $(function () {
 				source: '3',
 				target: '5',
 				label: 'Руководитель'
-			}
-		}, {
-			data: {
-				id: '3-5-2',
-				source: '3',
-				target: '5',
-				type: 'bezier',
-				label: 'Учредитель'
 			}
 		}, {
 			data: {
@@ -106,33 +102,36 @@ $(function () {
 		}, {
 			selector: 'node',
 			css: {
-				'width': 'label',
+				//'width': 'label',
+				'width': 32,
 				'height': 32,
-				'shape': 'roundrectangle',
+				'shape': 'circle',
 				'content': 'data(label)',
-				'padding-left': '48px',
-				'padding-right': '48px',
+				//'padding-left': '48px',
+				//'padding-right': '48px',
 				'font-size': 12,
 				'font-weight': 'bold',
 				'font-family': 'Arial, Helvetica, sans-serif',
-				'text-valign': 'center',
+				'text-valign': 'bottom',
 				'text-halign': 'center',
-				'border-color': '#a2ccf2',
+				'border-color': '#deefff',
+				'border-width': 1,
 				'background-color': '#deefff',
 				'background-image': 'company.png',
-				'background-position-x': '-33px'
+				//'background-position-x': '-33px'
 			}
 		}, {
 			selector: 'node.person',
 			css: {
 				'background-color': '#ffe596',
 				'background-image': 'person.png',
-				'background-position-x': '-28px'
+				'background-position-y': '3px'
+				//'background-position-x': '-28px'
 			}
 		}, {
 			selector: 'node:active, node.active',
 			css: {
-				'border-width': 1
+				'border-color': '#a2ccf2'
 			}
 		}, {
 			selector: '$node > node',
@@ -167,11 +166,13 @@ $(function () {
 			}
 		}],
 		layout: {
-			name: 'cose-bilkent',
-			fit: false,
+			//name: 'cose-bilkent',
+			name: 'preset',
+			fit: true,
 			padding: 16,
-			randomize: true,
-			idealEdgeLength: 100,
+			/*randomize: true,
+			nodeRepulsion: 1000,
+			idealEdgeLength: 1000,*/
 			animate: false,
 			stop: function () {
 				if (window.cy.center) {

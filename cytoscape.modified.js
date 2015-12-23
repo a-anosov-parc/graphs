@@ -12250,7 +12250,7 @@ BRp.recalculateNodeLabelProjection = function( node ){
       break;
 
     case 'bottom':
-      textY = nodePos.y + nodeHeight / 2;
+      textY = nodePos.y + nodeHeight / 2 + 8; // FIX
       break;
 
     default: // e.g. middle
@@ -16679,14 +16679,14 @@ CRp.drawText = function(context, element, textX, textY) {
       context.fillText( text, textX, textY );
 
       // FIX start
-      if (!element.data('isCompounded') && element.isNode()) {
+      /*if (!element.data('isCompounded') && element.isNode()) {
         var dotsX = textX + element.width() / 2 + 15;
 
         context.fillStyle = (element[0]._private.active || element.hasClass('active')) ? '#292d38' : '#b1becd';
         context.fillText('•', dotsX, textY);
         context.fillText('•', dotsX + 6, textY);
         context.fillText('•', dotsX + 12, textY);
-      }
+      }*/
       // FIX end
     }
 
