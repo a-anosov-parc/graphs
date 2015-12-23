@@ -57,6 +57,7 @@ $(function () {
 				id: '1-4',
 				source: '1',
 				target: '4',
+				type: 'bezier',
 				label: 'Адвокат'
 			},
 			classes: 'dashed'
@@ -73,6 +74,14 @@ $(function () {
 				source: '3',
 				target: '5',
 				label: 'Руководитель'
+			}
+		}, {
+			data: {
+				id: '3-5-2',
+				source: '3',
+				target: '5',
+				type: 'bezier',
+				label: 'Учредитель'
 			}
 		}, {
 			data: {
@@ -162,6 +171,7 @@ $(function () {
 			fit: false,
 			padding: 16,
 			randomize: true,
+			idealEdgeLength: 100,
 			animate: false,
 			stop: function () {
 				if (window.cy.center) {

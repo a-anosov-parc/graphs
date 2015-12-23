@@ -16347,7 +16347,7 @@ CRp.drawEdgeText = function(context, edge) {
     context.translate(rs.labelX, rs.labelY);
     context.rotate(theta);
 
-    this.drawText(context, edge, 0, -15); // FIX
+    this.drawText(context, edge, 0, -10); // FIX
 
     context.rotate(-theta);
     context.translate(-rs.labelX, -rs.labelY);
