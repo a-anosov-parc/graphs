@@ -10533,7 +10533,7 @@ CoseLayout.prototype.run = function() {
   });
 
   var done = function(){
-    refresh({
+    refresh({ 
       force: true,
       next: function(){
         // Layout has finished
@@ -12265,11 +12265,11 @@ BRp.recalculateNodeLabelProjection = function( node ){
 
   switch( textValign ){
     case 'top':
-      textY = nodePos.y - nodeHeight / 2 - 8; // FIX
+      textY = nodePos.y - nodeHeight / 2;
       break;
 
     case 'bottom':
-      textY = nodePos.y + nodeHeight / 2 + 8; // FIX
+      textY = nodePos.y + nodeHeight / 2;
       break;
 
     default: // e.g. middle
@@ -12378,13 +12378,6 @@ BRp.getLabelText = function( ele ){
         wrappedLines.push( line );
       }
     } // for
-
-    // FIX start
-    if (wrappedLines.length > 4) {
-      wrappedLines.length = 4;
-      wrappedLines[3] = $.trim(wrappedLines[3]) + '...';
-    }
-    // FIX end
 
     rscratch.labelWrapCachedLines = wrappedLines;
     rscratch.labelWrapCachedText = text = wrappedLines.join('\n');
@@ -16383,7 +16376,7 @@ CRp.drawEdgeText = function(context, edge) {
     context.translate(rs.labelX, rs.labelY);
     context.rotate(theta);
 
-    this.drawText(context, edge, 0, -10); // FIX
+    this.drawText(context, edge, 0, 0);
 
     context.rotate(-theta);
     context.translate(-rs.labelX, -rs.labelY);
@@ -16682,7 +16675,7 @@ CRp.drawText = function(context, element, textX, textY) {
 
     if( style['text-wrap'].value === 'wrap' ){
       var lines = rscratch.labelWrapCachedLines;
-      var lineHeight = rstyle.labelHeight / lines.length + 4; // FIX
+      var lineHeight = rstyle.labelHeight / lines.length;
 
       switch( valign ){
         case 'top':
